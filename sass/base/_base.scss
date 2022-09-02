@@ -8,11 +8,27 @@
 
 html {
     font-size: 62.5%;
+  
+    @include respond(big-desktop) {
+        font-size: 75%; // 1rem = 12px => x = (12 * 100)/16 = 75
+    }
+
+    @include respond(tab-land) { // width < 1200?
+        font-size: 56.25%; // 1rem = 9px => x = (9 * 100)/16 = 56.25
+    }
+
+    @include respond(tab-port) { // width < 900?
+        font-size: 50%; // 1rem = 8px => x = (8 * 100)/16 = 50
+    }
 }
 
 body {
     padding: 3rem;
     box-sizing: border-box;
+
+    @include respond(tab-port) {
+        padding: 0;
+    }
 }
 
 /* 
@@ -21,10 +37,16 @@ body {
 
     Default do browser é 16px
     Porém queremos uma fonte de 10px
-    Sendo assim, fazemos uma regra de três x = 100 * 10/16 = 62.5
+    Sendo assim, fazemos uma regra de três x = (100 * 10)/16 = 62.5
 
     Por que queremos uma font-size de 10px?
     Simples, queremos isso para que 1rem seja igual a 10px, dessa forma podemos mudar todas as unidades do nosso estilo para rem.
     Quando o tamanho da fonte for alterado, todas as medidas do site serão alteradas junto com ele, fazendo assim com que o site seja responsivo 
     sem precisar criar varios media query
+*/
+
+/*
+    Desktop first: media query devem ser em ordem da maior resolução para a menor resolução
+
+    Mobile first: media query devem ser em ordem da menor resolução para a maior resolução 
 */
